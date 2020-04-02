@@ -9,13 +9,14 @@ InitiateMongoServer();
 const app = express();
 
 // PORT
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(bodyParser.json());
 
+app.use(express.static("./client/build"));
 app.get("/", (req, res) => {
-  res.json({ message: "API Working" });
+  res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
 
 /**
