@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 
 // Replace this with your MONGOURI.
-const MONGOURI = "mongodb://test:a12345@ds257698.mlab.com:57698/node-auth";
+const MONGOURI =
+  "mongodb+srv://icpcbot1209:Rui19921209@cluster0-jeeau.mongodb.net/test?retryWrites=true&w=majority";
 
 const InitiateMongoServer = async () => {
   try {
     await mongoose.connect(MONGOURI, {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
     console.log("Connected to DB !!");
   } catch (e) {

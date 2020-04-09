@@ -1,80 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../App.scss";
+import * as HttpUser from "../http/HttpUser";
 
-import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  // Link,
-  // Redirect,
-  useHistory,
-  useLocation
-} from "react-router-dom";
-
-import { fakeAuth } from "../modules/fakeAuth.js";
+import { useHistory, useLocation } from "react-router-dom";
 
 export const LogIn = () => {
-  // const [isBusy, setIsBusy] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
   let history = useHistory();
   let location = useLocation();
-
   let { from } = location.state || { from: { pathname: "/" } };
-  let login = () => {
-    fakeAuth.authenticate(() => {
-      history.replace(from);
-    });
-  };
 
-  const onClickLogIn = async e => {
-    // setIsBusy(true);
+  const tryLogIn = async () => {
     try {
-      await login();
+      let resp = await HttpUser.tryLogIn(username, password);
+      let token = resp.data.token;
+      await localStorage.setItem("token_chattingstar", token);
+      // localStorage.removeItem("token_chattingstar");
+      let { from } = location.state || { from: { pathname: "/" } };
+      history.replace(from);
     } catch (err) {
       console.log(err);
     }
-    // setIsBusy(false);
-  };
-
-  const onClickSignUp = e => {
-    console.log("signup");
   };
 
   return (
     <div>
-      <video className="video-background" preload="auto" autoPlay loop muted>
-        <source src="/assets/video/starfield.mp4" type="video/mp4" />
-        Your browser does not support HTML5 video.
-      </video>
-
       <div className="logo-container">
-        <a href="/home" style={{ zIndex: 500 }}>
-          <img src="/assets/img/logo512.png" className="App-logo" alt="logo" />
-        </a>
+        <img src="/assets/img/logo512.png" className="App-logo" alt="logo" />
       </div>
 
       <div className="content-bottom">
         <h1>Chatting Star</h1>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            tryLogIn();
+          }}
+        >
+          <a className="btn-transp-round" href="/signup">
+            +
+          </a>
 
-        <button className="btn-transp-round" onClick={onClickSignUp}>
-          +
-        </button>
+          <input
+            type="text"
+            className="input-transp"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            className="input-transp"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <input
-          type="text"
-          className="input-transp"
-          placeholder="userid/email"
-        ></input>
-        <input
-          type="password"
-          className="input-transp"
-          placeholder="password"
-        ></input>
-
-        <button className="btn-transp" onClick={onClickLogIn}>
-          Log In
-        </button>
+          <button type="submit" className="btn-transp">
+            Log In
+          </button>
+        </form>
       </div>
     </div>
   );

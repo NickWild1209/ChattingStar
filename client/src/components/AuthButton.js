@@ -1,20 +1,21 @@
 import React from "react";
-
+import { useHistory, useLocation } from "react-router-dom";
 export const AuthButton = () => {
   let history = useHistory();
 
-  return fakeAuth.isAuthenticated ? (
+  return (
     <p>
       Welcome!{" "}
       <button
         onClick={() => {
-          fakeAuth.signout(() => history.push("/"));
+          localStorage.removeItem("token_chattingstar");
+
+          history.replace({ pathname: "/" });
+          window.location.reload();
         }}
       >
         Sign out
       </button>
     </p>
-  ) : (
-    <p>You are not logged in.</p>
   );
 };

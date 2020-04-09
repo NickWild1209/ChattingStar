@@ -46,8 +46,10 @@
   padding: 20px;
 }
 
+////////////////////////////////////
+
 .btn-transp {
-  width: 200px;
+  width: 240px;
   font-size: 18px;
   padding: 10px;
   background: #0000;
@@ -70,6 +72,7 @@
   cursor: pointer;
   border: thin solid yellow;
   border-radius: 20px;
+  text-decoration: none;
 }
 
 .btn-transp-round:hover {
@@ -77,12 +80,20 @@
 }
 
 .input-transp {
-  width: 200px;
+  width: 240px;
   font-size: 18px;
   padding: 10px;
   background: #0000;
   color: #fff;
-  // cursor: pointer;
+  border: thin solid yellow;
+}
+
+.input-transp-sm {
+  width: 115px;
+  font-size: 18px;
+  padding: 10px;
+  background: #0000;
+  color: #fff;
   border: thin solid yellow;
 }
 

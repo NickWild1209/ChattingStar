@@ -1,0 +1,32 @@
+.avatar-wrapper {
+  display: inline-block;
+  // position: relative;
+  height: 120px;
+  width: 120px;
+  margin: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 1px 1px 15px 10px rgb(253, 238, 154);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  .avatar-icon {
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    color: #34495e;
+    background-color: transparent;
+    text-align: center;
+  }
+  .profile-pic {
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  .file-upload {
+    display: none;
+  }
+}
